@@ -40,7 +40,7 @@ public class project {
         stats.add(critChance);
         stats.add(critDamage);
 
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 0; i <= 5; i++) {
             stats.add(0);
         }
 
@@ -176,11 +176,11 @@ public class project {
 
         int possDrop = (int)(Math.random()*4)+1 ;
 
-        System.out.println("|||  The boss droped the following loot |||");
+        System.out.println("\n|||  The boss droped the following loot |||");
 
         if (possDrop == 1){
 
-            System.out.println("... .. ....... 8@SSXS@.:........... .. .");
+            System.out.println("\n... .. ....... 8@SSXS@.:........... .. .");
             System.out.println(". ........: . :8;t;8 :   ...:.. . ... ..");
             System.out.println("... ........: @8888@@%88 ......... .... ");
             System.out.println(". ...... ....: ;;Xt@8.t........ ... . ..");
@@ -202,7 +202,7 @@ public class project {
             
         }else if (possDrop == 2){
 
-            System.out.println("....'..''.''.................................................................");
+            System.out.println("\n....'..''.''.................................................................");
             System.out.println("........'.'''................................................................");
             System.out.println(".....'''..'','''.............................................................");
             System.out.println(".....';,'..',;::,'..''.......................................................");
@@ -246,7 +246,7 @@ public class project {
 
         }else if (possDrop == 3){
 
-            System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMWNNWMMMMMMMMMMMMMMMMMMMMMMMMMM");
+            System.out.println("\nMMMMMMMMMMMMMMMMMMMMMMMMMWNNWMMMMMMMMMMMMMMMMMMMMMMMMMM");
             System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMN0KX0XMMMMMMMMMMMMMMMMMMMMMMMMM");
             System.out.println("MMMMMMMMMMMMMMMMMMMMMMNKOkXW0kXMMMMMMMMMMMMMMMMMMMMMMMM");
             System.out.println("MMMMMMMMMMMMMMMMMMMMMXxodkKNXkxKWMMMMMMMMMMMMMMMMMMMMMM");
@@ -355,7 +355,7 @@ public class project {
 
         }else{
 
-            System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+            System.out.println("\nMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
             System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWX00OOOO0XMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
             System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWKddOOOOkokNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
             System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNOkKWMMMW0x0WMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
@@ -678,6 +678,84 @@ public class project {
     }
 
 
+
+    public static void printroll(){
+
+        int roll = (int)(Math.random()*100)+1;
+
+        System.out.println("\n                 ooo OOO OOO ooo");
+        System.out.println("               oOO       |         OOo");
+        System.out.println("           oOO           |             OOo");
+        System.out.println("        oOO              |                OOo");
+        System.out.println("      oOO                |                  OOo");
+        System.out.println("    oOO   Face the Final | Teleport to the    OOo");
+        System.out.println("   oOO    Boss-45%       |    the treasur      OOo");
+        System.out.println("  oOO                    |       house-4%       OOo");
+        System.out.println(" oOO                     |                       OOo");
+        System.out.println(" oOO                     |                       OOo");
+        System.out.println(" oOO_____________________|_______________________OOo<~~~~~~~"); 
+        System.out.println(" oOO                     |                       OOo ");
+        System.out.println(" oOO                     |                       OOo");
+        System.out.println("  oOO     Teleport out   |  Get stuck here      OOo");
+        System.out.println("   oOO    of here-6%     |   forever-45%       OOo");
+        System.out.println("    oOO                  |                    OOo");
+        System.out.println("      oOO                |                  OOo");
+        System.out.println("        oO               |                OOo");
+        System.out.println("           oOO           |             OOo");
+        System.out.println("               oOO       |         OOo");
+        System.out.println("                   ooo OOO OOO ooo");
+
+        if (roll <= 45){
+
+            System.out.print("\n--Your Stuck here forever--");
+
+
+        }else if (roll <= 90){
+
+            System.out.println("\n--You will Facethe Final boss--");
+            int maxTarget = 200;
+
+            Boss(200,10,20);
+            lastBoss(stats.get(4), stats.get(5));
+
+            if (battle(stats.get(0), stats.get(4), maxTarget)){
+
+                System.out.println("\n***You manged to kill the drgon, which cause a hidden path to open***\n***Curiosity caused you to walk in, closer you got the brighter the room seemd");
+                win();
+                hasTreasur();
+
+            }
+
+        }else if (roll <= 96){
+
+            System.out.println("\n--You teleported out of the dungeon!--");
+            win();
+            hasTreasur();
+
+        }else{
+            
+            System.out.println("----You hit the jackpot----");
+            stats.add(10000000);
+            win();
+            hasTreasur();
+
+        }
+    }
+
+
+
+    public static void hasTreasur(){
+
+        if (stats.get(8) > 0){
+
+            System.out.println(String.format("You escaped the dungeon with $ %d", stats.get(8)));
+
+        }else{
+
+            System.out.println("You escaped the dungeon with $0!");
+        }
+    }
+
     /*Prints Bats */
     public static void printBat(int bossHealth, int playerHealth) {
 
@@ -760,6 +838,7 @@ public class project {
 
                 if (battle(playerHealth, bossHealth, maxTarget)) {
                     System.out.println("You have Defeated all the Bats!");
+                    win();
                     drops();
                     System.out.println(
                      "\nThere are three Paths you can take, but your guts tell you two of which, will lead to your death!");
@@ -794,6 +873,7 @@ public class project {
                             if (battle(playerHealth, bossHealth, maxTarget)){
                                 System.out.println("\n***You manged to kill the drgon, which cause a hidden path to open***\n***Curiosity caused you to walk in, closer you got the brighter the room seemd");
                                 win();
+                                hasTreasur();
 
                             }else{
                                 System.out.print("\n***You Hit the wrong spot now you face the wrath of the dragon***\n");
@@ -811,6 +891,7 @@ public class project {
                             int answer3 = input.nextInt();
                             if (answer3 == (int)(Math.random()*2)+1){
                                 win();
+                                hasTreasur();
 
                             }else{
                                 death(name);
@@ -852,7 +933,25 @@ public class project {
                     System.out.println("\n**You have defeated the minatour!");
                     drops();
 
-                    
+                    System.out.println("***After you defeated the minatour, you decided to walk in the direction where the minaotour came from!***");
+                    System.out.println("***After a long walk, you see a person with a fortune wheel***");
+                    System.out.println("He questions \"Hey their do yo want to Spin the wheel\" ? ");
+                    System.out.println("Chosse: stay or run");
+
+                    String answer1 = input.nextLine().toUpperCase();
+
+                    if (answer1.equals("STAY")){
+
+                        System.out.println("\n***You look at the Wheel and it has four options:***");
+                        printroll();
+
+
+
+                    }else{
+                        System.out.println("\n***The person looks at you with a evil grin, annnnnnd you fall***");
+                        spike();
+                        death(name);
+                    }
 
                 }else{
                     death(name);

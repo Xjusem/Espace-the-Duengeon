@@ -172,6 +172,10 @@ public class project {
         return true;
     }
 
+
+
+
+    /* Random potion drop for boss Kill */
     public static void drops(){
 
         int possDrop = (int)(Math.random()*4)+1 ;
@@ -622,7 +626,7 @@ public class project {
     }
 
     /*Prints grave */
-    public static void death(String name){
+    public static void death(){
 
         System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@⠏⣩⣉⠙⠻⢿@@@@@@@@@@@");
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@⡿⢉⣛⠛⠿⢿⡟⣰@⢻@⡆⠀⠈@@@@@@@@@@");
@@ -678,7 +682,7 @@ public class project {
     }
 
 
-
+    /*Prints a luky wheel */
     public static void printroll(){
 
         int roll = (int)(Math.random()*100)+1;
@@ -720,7 +724,7 @@ public class project {
 
             if (battle(stats.get(0), stats.get(4), maxTarget)){
 
-                System.out.println("\n***You manged to kill the drgon, which cause a hidden path to open***\n***Curiosity caused you to walk in, closer you got the brighter the room seemd");
+                System.out.println("\n***You manged to kill the dargon, which cause a hidden path to open***\n***Curiosity caused you to walk in, closer you got the brighter the room seemd");
                 win();
                 hasTreasur();
 
@@ -744,6 +748,7 @@ public class project {
 
 
 
+    /*Checks if you have treaure after you espace */
     public static void hasTreasur(){
 
         if (stats.get(8) > 0){
@@ -877,7 +882,7 @@ public class project {
 
                             }else{
                                 System.out.print("\n***You Hit the wrong spot now you face the wrath of the dragon***\n");
-                                death(name);
+                                death();
                                 return false;
                             }
                         
@@ -894,13 +899,14 @@ public class project {
                                 hasTreasur();
 
                             }else{
-                                death(name);
+                                death();
                             }
 
                         } else if (c3 == answer2) {
 
                             System.out.println("***You walked and walked but evetualty fell into a spike pit!***");
                             spike();
+                            death();
 
                         } else {
 
@@ -909,7 +915,7 @@ public class project {
                         }
                     }
                 } else {
-                    death(name);
+                    death();
                     return false;
                 }
             
@@ -950,17 +956,17 @@ public class project {
                     }else{
                         System.out.println("\n***The person looks at you with a evil grin, annnnnnd you fall***");
                         spike();
-                        death(name);
+                        death();
                     }
 
                 }else{
-                    death(name);
+                    death();
                 }
 
             }else{
 
                 System.out.println("Invalid input so you die");
-                death(name);
+                death();
             }
             
             

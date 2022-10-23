@@ -115,7 +115,7 @@ public class project {
         while (playerHealth > 0) {
 
             int damage;
-            try (Scanner input = new Scanner(System.in)) {
+            Scanner input = new Scanner(System.in);
                 if (introduction) {
                     System.out.println("\n ___________________________________________________________"
                             + "\n+                   ***NOTICE**                             +");
@@ -152,7 +152,7 @@ public class project {
                 } else {
                     playerHealth -= stats.get(5);
                 }
-            }
+            
             if (playerHealth <= 0) {
                 break;
             }

@@ -106,9 +106,14 @@ public class project {
     }
 
 
+    public static void newMaxTarget(int number){
+
+        stats.set(7,number);
+        
+    }
 
     /*Runs until player or opponent are defetead,checks crit and other aspect of battle */
-    public static Boolean battle(int playerHealth, int bossHealth, int maxTarget) {
+    public static Boolean battle(int playerHealth, int bossHealth, int maxTarget, int maxTargetminus) {
 
         Boolean introduction = true;
 
@@ -125,14 +130,16 @@ public class project {
                     introduction = false;
                 }
 
-                System.out.println("  \n(The range is 0-" + maxTarget + ")");
+                System.out.println("  \n(The range is 0-" + stats.get(7) + ")");
                 int userGuess = input.nextInt();
 
                 if (farorClose(userGuess) == true) {
 
+                    newMaxTarget(maxTargetminus);
+                    int maxTarget3  = stats.get(7);
                     if (critOrNot(stats.get(2))) {
 
-                        setTarget(maxTarget);
+                        setTarget(maxTarget3);
                         double cD = stats.get(3) / 100;
                         damage = (int) (stats.get(1) + (cD * stats.get(1)));
                         bossHealth -= damage;
@@ -140,7 +147,7 @@ public class project {
 
                     } else {
 
-                        setTarget(maxTarget);
+                        setTarget(maxTarget3);
                         damage = stats.get(1);
                         bossHealth -= damage;
                         System.out.println("dmg: -" + damage);
@@ -712,7 +719,7 @@ public class project {
         if (roll <= 45){
 
             System.out.print("\n--Your Stuck here forever--");
-
+            death();
 
         }else if (roll <= 90){
 
@@ -747,6 +754,8 @@ public class project {
     }
 
 
+
+    
 
     /*Checks if you have treaure after you espace */
     public static void hasTreasur(){
@@ -870,7 +879,7 @@ public class project {
                         if (c1 == answer2) {
 
                             maxTarget = 600;
-                            Boss(1,99999999,10);
+                            Boss(1,99999999,10,1);
                             setTarget(maxTarget);
                             System.out.println("\n***When you set foot in the cave, the temperature went up and the path behind closed***\n***You could see a giant shadow smilar to dragon sleeping***\n***There is no way out but, but there is a chance you can kill the dragon***\n***You need to find his weak spot you have only (1) try***");
                             lastBoss(stats.get(4),stats.get(5));
@@ -925,15 +934,16 @@ public class project {
                 Boss(100, 6, 80);
                 int bossHealth = stats.get(4);
                 int bossDamage = stats.get(5);
+                int playerHealth = stats.get(0);
                 int misschance = stats.get(6);
                 int maxTarget = 100;
 
                 System.out.println("***Their is a minatour approching and he is fast!***");
                 miantour(bossHealth, bossDamage, misschance);
-                
+                setTarget(maxTarget);
                 System.out.println("***Their is no way out but to fight!***");
 
-                if (battle(bossHealth, bossHealth, maxTarget)){
+                if (battle(playerHealth, bossHealth, maxTarget)){
 
                     win();
                     System.out.println("\n**You have defeated the minatour!");
@@ -949,8 +959,20 @@ public class project {
                     if (answer1.equals("STAY")){
 
                         System.out.println("\n***You look at the Wheel and it has four options:***");
-                        printroll();
+                        System.out.println("Choose: Spin");
+                        Boolean yes = true;
 
+                        while (yes){
+                            
+                            String answer2 = input.nextLine().toUpperCase();
+                            if (answer2.equals("Spin")){
+                                printroll();
+                                yes = false;
+
+                            }else{
+                                System.out.println("wrong input!");
+                            }
+                        }
 
 
                     }else{

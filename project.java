@@ -40,7 +40,7 @@ public class project {
         stats.add(critChance);
         stats.add(critDamage);
 
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 6; i++) {
             stats.add(0);
         }
 
@@ -76,6 +76,7 @@ public class project {
     /*Sets the target value in the list */
     public static void setTarget(int maxTarget) {
         stats.set(7, (int) (Math.random() * maxTarget) + 1);
+        stats.set(8,maxTarget);
     }
 
 
@@ -112,6 +113,7 @@ public class project {
         
     }
 
+
     /*Runs until player or opponent are defetead,checks crit and other aspect of battle */
     public static Boolean battle(int playerHealth, int bossHealth, int maxTarget, int maxTargetminus) {
 
@@ -130,13 +132,12 @@ public class project {
                     introduction = false;
                 }
 
-                System.out.println("  \n(The range is 0-" + stats.get(7) + ")");
+                System.out.println("  \n(The range is 0-" + stats.get(8) + ")");
                 int userGuess = input.nextInt();
 
                 if (farorClose(userGuess) == true) {
 
-                    newMaxTarget(maxTargetminus);
-                    int maxTarget3  = stats.get(7);
+                    int maxTarget3  = stats.get(8) - maxTargetminus;
                     if (critOrNot(stats.get(2))) {
 
                         setTarget(maxTarget3);
@@ -729,7 +730,7 @@ public class project {
             Boss(200,10,20);
             lastBoss(stats.get(4), stats.get(5));
 
-            if (battle(stats.get(0), stats.get(4), maxTarget)){
+            if (battle(stats.get(0), stats.get(4), maxTarget,30)){
 
                 System.out.println("\n***You manged to kill the dargon, which cause a hidden path to open***\n***Curiosity caused you to walk in, closer you got the brighter the room seemd");
                 win();
@@ -850,7 +851,7 @@ public class project {
                 setTarget(50);
                 printBat(bossHealth, playerHealth);
 
-                if (battle(playerHealth, bossHealth, maxTarget)) {
+                if (battle(playerHealth, bossHealth, maxTarget,5)) {
                     System.out.println("You have Defeated all the Bats!");
                     win();
                     drops();
@@ -879,12 +880,12 @@ public class project {
                         if (c1 == answer2) {
 
                             maxTarget = 600;
-                            Boss(1,99999999,10,1);
+                            Boss(1,99999999,10);
                             setTarget(maxTarget);
                             System.out.println("\n***When you set foot in the cave, the temperature went up and the path behind closed***\n***You could see a giant shadow smilar to dragon sleeping***\n***There is no way out but, but there is a chance you can kill the dragon***\n***You need to find his weak spot you have only (1) try***");
                             lastBoss(stats.get(4),stats.get(5));
 
-                            if (battle(playerHealth, bossHealth, maxTarget)){
+                            if (battle(playerHealth, bossHealth, maxTarget,1)){
                                 System.out.println("\n***You manged to kill the drgon, which cause a hidden path to open***\n***Curiosity caused you to walk in, closer you got the brighter the room seemd");
                                 win();
                                 hasTreasur();
@@ -943,7 +944,7 @@ public class project {
                 setTarget(maxTarget);
                 System.out.println("***Their is no way out but to fight!***");
 
-                if (battle(playerHealth, bossHealth, maxTarget)){
+                if (battle(playerHealth, bossHealth, maxTarget,10)){
 
                     win();
                     System.out.println("\n**You have defeated the minatour!");
